@@ -1,0 +1,27 @@
+* {
+    margin: 0 auto;
+    width: 500px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#container {
+    border: 5px solid black;
+    width: 500px;
+    height: 500px;
+
+}
+
+#choices, #scoreboard {
+    display: flex;
+    margin: 25px auto;
+
+}
+
+.buttons{
+    display: inline-block;
+    margin: 10px;
+
+}
