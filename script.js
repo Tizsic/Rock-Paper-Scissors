@@ -11,6 +11,8 @@ const choice = ['rock', 'paper', 'scissors'];
 const gameContainer = document.getElementById('game_container');
 const startupContainer = document.getElementById('startup_container');
 const resultsInformation = document.getElementById('results');
+const choiceAnimation = document.getElementById('choice_animation');
+
 //score keepers
 let playerScore = 0;
 let computerScore = 0;
@@ -57,36 +59,58 @@ function gamesPlayed(){
     resultsInformation.innerText = "Tie Game!";
 }
 
+//show images/choices
+function displayChoiceImage(src, width, height){
+    const img = document.createElement("img");
+    img.src = src;
+    img.width = width;
+    img.height = height;
+    choiceAnimation.appendChild(img);
+}
+
 //function to compare results
 function compare(playerChoice){
     //if both the player's selection and computer's selection are the same, its a tied game
     let computerDecision = Math.floor(Math.random() * choice.length);
 
     if(playerChoice === choice[computerDecision]){
+        console.log(playerChoice, choice[computerDecision]);
         gamesPlayed();
     }
     //if player's selection is rock and computer's selection is paper, computer wins
     else if(playerChoice === choice[0] && choice[computerDecision] === choice[1]){
+        displayChoiceImage('assets/rock.png', 150, 150);
+        displayChoiceImage('assets/paper.png', 150, 150);
         increaseComputerScore();
     }
     //if player's selection is rock and computer's selection is scissors, player wins
     else if(playerChoice === choice[0] && choice[computerDecision] === choice[2]){
+        displayChoiceImage('assets/rock.png', 150, 150);
+        displayChoiceImage('assets/scissors.png', 150, 150);
         increasePlayerScore();
     }
     //if player's selection is paper and computer selection is rock, player wins
     else if(playerChoice === choice[1] && choice[computerDecision] === choice[0]){
+        displayChoiceImage('assets/paper.png', 150, 150);
+        displayChoiceImage('assets/rock.png', 150, 150);
         increasePlayerScore();
     }
     //if player's selection is paper and computer selection is scissors, computer wins
     else if(playerChoice === choice[1] && choice[computerDecision] === choice[2]){
+        displayChoiceImage('assets/paper.png', 150, 150);
+        displayChoiceImage('assets/scissors.png', 150, 150);
         increaseComputerScore();
     }
     //if player's selection is scissors and computer selection is rock, computer wins
     else if(playerChoice === choice[2] && choice[computerDecision] === choice[0]){
+        displayChoiceImage('assets/scissors.png', 150, 150);
+        displayChoiceImage('assets/rock.png', 150, 150);
         increaseComputerScore();
     }
     //if player's selection is scissors and computer selection is paper, player wins
     else if(playerChoice === choice[2] && choice[computerDecision] === choice[1]){
+        displayChoiceImage('assets/scissors.png', 150, 150);
+        displayChoiceImage('assets/paper.png', 150, 150);
         increasePlayerScore();
     }
     else
