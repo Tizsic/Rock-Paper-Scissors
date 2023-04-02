@@ -74,7 +74,7 @@ function compare(playerChoice){
     let computerDecision = Math.floor(Math.random() * choice.length);
 
     if(playerChoice === choice[computerDecision]){
-        console.log(playerChoice, choice[computerDecision]);
+        displayChoiceImage('assets/tie.png', 150, 150);
         gamesPlayed();
     }
     //if player's selection is rock and computer's selection is paper, computer wins
@@ -115,6 +115,7 @@ function compare(playerChoice){
     }
     else
         console.log('error!', playerChoice, choice[computerDecision]); 
+
 };
 
 //user selectection/buttons
@@ -143,5 +144,3 @@ sevenGamesButton.addEventListener('click', () => {
     hideStartupContainer();
     showGameContainer();
 });
-
-
