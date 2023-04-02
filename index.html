@@ -5,35 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock/Paper/Scissors</title>
-    <link rel="stylesheet" src="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Rock, Paper, Scissors!</h1>
+    <h1 id="title">Rock, Paper, Scissors!</h1>
     <div id="startup_container">
-        <form>
-            <p>Please Set the amount of games to be played</p>
-            <input type="radio" id="three_games" name="amount_of_games" value="3">
-            <label for="three_games">3 games</label><br>
-            <input type="radio" id="five_games" name="amount_of_games" value="5">
-            <label for="five_games">5 games</label><br>
-            <input type="radio" id="seven_games" name="amount_of_games" value="7">
-            <label for="seven_games">7 games</label><br>
-            <input type="submit" value="Submit">
-        </form>
-
-    </div>
-    <div class="game_container">
-        <div class="score_container">
-            <ul>
-                <li id="games_played">Games Played</li>
-                <li id="player_score">player</li>
-                <li id="computer_score">computer</li>
-            </ul>
-        </div>
-        <div class="animation_container">
-
-        </div>
+        <p>Please select the max amount of games to play</p>
         <div>
+            <button id="three_games">Three Games</button>
+            <button id="five_games">Five Games</button>
+            <button id="seven_games">Seven Games</button>
+        </div>
+        
+    </div>
+    <div id="game_container">
+        <div id="score_container">
+                <div>
+                    <h4>Player Score</h4>
+                    <p id="player_score">0</p>
+                </div>
+                <div>
+                    <h4>Games Played</h4>
+                    <p id="games_played">0</p>
+                </div>
+                <div>
+                    <h4>Computer Score</h4>
+                    <p id="computer_score">0</p>
+                </div>
+        </div>
+        <div id="animation_container">
+
+        </div>
+        <div id="choice_container">
             <button id="rock">Rock</button>
             <button id="paper">Paper</button>
             <button id="scissors">Scissors</button>

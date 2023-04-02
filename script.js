@@ -2,7 +2,14 @@
 const rockButton = document.getElementById('rock');
 const paperButton = document.getElementById('paper');
 const scissorsButton = document.getElementById('scissors');
+const threeGamesButton = document.getElementById('three_games');
+const fiveGamesButton = document.getElementById('five_games');
+const sevenGamesButton = document.getElementById('seven_games');
+
+//other initializations
 const choice = ['rock', 'paper', 'scissors'];
+const gameContainer = document.getElementById('game_container');
+const startupContainer = document.getElementById('startup_container');
 
 //score keepers
 let playerScore = 0;
@@ -15,7 +22,21 @@ function setGameLimit(element){
     gameLimit = element;
 }
 
-//
+//toggles for game and startup containers
+function showGameContainer(){
+    gameContainer.style.display = 'block';
+}
+function hideGameContainer(){
+    gameContainer.style.display = 'none';
+}
+function showStartupContainer(){
+    startupContainer.style.display = 'block';
+}
+function hideStartupContainer(){
+    startupContainer.style.display = 'none';
+}
+
+//score handlers and modifiers
 function increasePlayerScore(){
     playerScore++;
     gamesPlayed();
@@ -69,7 +90,7 @@ function compare(playerChoice){
         console.log('error!', playerChoice, choice[computerDecision]); 
 };
 
-//user selectection
+//user selectection/buttons
 rockButton.addEventListener('click', () => {
     compare(choice[0]);
 });
@@ -79,7 +100,21 @@ paperButton.addEventListener('click', () => {
 scissorsButton.addEventListener('click', () => {
     compare(choice[2]);
 });
-
-//
+threeGamesButton.addEventListener('click', () => {
+    setGameLimit(3);
+    hideStartupContainer();
+    showGameContainer();
+    
+});
+fiveGamesButton.addEventListener('click', () => {
+    setGameLimit(5);
+    hideStartupContainer();
+    showGameContainer();
+});
+sevenGamesButton.addEventListener('click', () => {
+    setGameLimit(7);
+    hideStartupContainer();
+    showGameContainer();
+});
 
 
