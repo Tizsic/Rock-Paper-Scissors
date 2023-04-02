@@ -7,12 +7,30 @@ const choice = ['rock', 'paper', 'scissors'];
 //score keepers
 let playerScore = 0;
 let computerScore = 0;
-let gamesPlayed = 0;
+let amountOfGamesPlayed = 0;
 let gameLimit = 0;
 
 //set game limit
 function setGameLimit(element){
     gameLimit = element;
+}
+
+//
+function increasePlayerScore(){
+    playerScore++;
+    gamesPlayed();
+    document.getElementById('player_score').innerText = playerScore;
+}
+
+function increaseComputerScore(){
+    computerScore++;
+    gamesPlayed();
+    document.getElementById('computer_score').innerText = computerScore;
+}
+
+function gamesPlayed(){
+    amountOfGamesPlayed++;
+    document.getElementById('games_played').innerText = amountOfGamesPlayed;
 }
 
 //function to compare results
@@ -21,37 +39,31 @@ function compare(playerChoice){
     let computerDecision = Math.floor(Math.random() * choice.length);
 
     if(playerChoice === choice[computerDecision]){
-        gamesPlayed++;
+        gamesPlayed();
     }
     //if player's selection is rock and computer's selection is paper, computer wins
     else if(playerChoice === choice[0] && choice[computerDecision] === choice[1]){
-        gamesPlayed++;
-        computerScore++;
+        increaseComputerScore();
     }
     //if player's selection is rock and computer's selection is scissors, player wins
     else if(playerChoice === choice[0] && choice[computerDecision] === choice[2]){
-        gamesPlayed++;
-        playerScore++;
+        increasePlayerScore();
     }
     //if player's selection is paper and computer selection is rock, player wins
     else if(playerChoice === choice[1] && choice[computerDecision] === choice[0]){
-        gamesPlayed++;
-        playerScore++;
+        increasePlayerScore();
     }
     //if player's selection is paper and computer selection is scissors, computer wins
     else if(playerChoice === choice[1] && choice[computerDecision] === choice[2]){
-        gamesPlayed++;
-        computerScore++;
+        increaseComputerScore();
     }
     //if player's selection is scissors and computer selection is rock, computer wins
     else if(playerChoice === choice[2] && choice[computerDecision] === choice[0]){
-        gamesPlayed++;
-        computerScore++;
+        increaseComputerScore();
     }
     //if player's selection is scissors and computer selection is paper, player wins
     else if(playerChoice === choice[2] && choice[computerDecision] === choice[1]){
-        gamesPlayed++;
-        playerScore++;
+        increasePlayerScore();
     }
     else
         console.log('error!', playerChoice, choice[computerDecision]); 
