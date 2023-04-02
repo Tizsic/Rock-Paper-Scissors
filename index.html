@@ -10,13 +10,14 @@
 <body>
     <h1 id="title">Rock, Paper, Scissors!</h1>
     <div id="startup_container">
-        <p>Please select the max amount of games to play</p>
         <div>
+            <p>Please select the max amount of games to play</p>
+        </div>
+        <div id="amount_of_games_container">
             <button id="three_games">Three Games</button>
             <button id="five_games">Five Games</button>
             <button id="seven_games">Seven Games</button>
         </div>
-        
     </div>
     <div id="game_container">
         <div id="score_container">
@@ -34,7 +35,9 @@
                 </div>
         </div>
         <div id="animation_container">
-
+            <div id="player_choice_animation"></div>
+            <div id="computer_choice_animation"></div>
+                <p id="results"></p>
         </div>
         <div id="choice_container">
             <button id="rock">Rock</button>

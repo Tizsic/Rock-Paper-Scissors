@@ -10,7 +10,7 @@ const sevenGamesButton = document.getElementById('seven_games');
 const choice = ['rock', 'paper', 'scissors'];
 const gameContainer = document.getElementById('game_container');
 const startupContainer = document.getElementById('startup_container');
-
+const resultsInformation = document.getElementById('results');
 //score keepers
 let playerScore = 0;
 let computerScore = 0;
@@ -41,17 +41,20 @@ function increasePlayerScore(){
     playerScore++;
     gamesPlayed();
     document.getElementById('player_score').innerText = playerScore;
+    resultsInformation.innerText = 'Player Won!';
 }
 
 function increaseComputerScore(){
     computerScore++;
     gamesPlayed();
     document.getElementById('computer_score').innerText = computerScore;
+    resultsInformation.innerText = 'The Computer Won!';
 }
 
 function gamesPlayed(){
     amountOfGamesPlayed++;
     document.getElementById('games_played').innerText = amountOfGamesPlayed;
+    resultsInformation.innerText = "Tie Game!";
 }
 
 //function to compare results

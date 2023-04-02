@@ -3,8 +3,19 @@
 }
 
 #startup_container{
+    width: 500px;
+    margin: auto;
+    height: 45px;
+}
+
+#startup_container > div > p {
+    text-align: center;
+    margin-top: 50%;
+}
+
+#amount_of_games_container{
     display: flex;
-    
+    justify-content: space-between;
 }
 
 #game_container {
@@ -20,9 +31,20 @@
     border: 2px solid black;
     height: 600px;
     width: 50%vw;
+    position: relative;
 }
 
 #choice_container {
     display: flex;
     justify-content: space-between;
+}
+
+#results {
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    font-size: 45px;
+
 }
