@@ -5,11 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock/Paper/Scissors</title>
+    <link rel="stylesheet" src="style.css">
 </head>
 <body>
+    <h1>Rock, Paper, Scissors!</h1>
     <div id="startup_container">
-        <h3>Please Set the amount of games to be played</h1>
-            
+        <form>
+            <p>Please Set the amount of games to be played</p>
+            <input type="radio" id="three_games" name="amount_of_games" value="3">
+            <label for="three_games">3 games</label><br>
+            <input type="radio" id="five_games" name="amount_of_games" value="5">
+            <label for="five_games">5 games</label><br>
+            <input type="radio" id="seven_games" name="amount_of_games" value="7">
+            <label for="seven_games">7 games</label><br>
+            <input type="submit" value="Submit">
+        </form>
 
     </div>
     <div class="game_container">
