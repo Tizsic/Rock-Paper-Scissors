@@ -13,6 +13,7 @@ const startupContainer = document.getElementById('startup_container');
 const resultsInformation = document.getElementById('results');
 const choiceAnimation = document.getElementById('choice_animation');
 
+
 //score keepers
 let playerScore = 0;
 let computerScore = 0;
@@ -21,6 +22,8 @@ let gameLimit = 0;
 let playerImg = document.createElement("img");
 let computerImg = document.createElement("img");
 const tiedImg = document.createElement("img");
+let computerChoice = getComputerChoice();
+let playerChoice;
 
 //set game limit
 function setGameLimit(element){
@@ -44,14 +47,12 @@ function hideStartupContainer(){
 //score handlers and modifiers
 function increasePlayerScore(){
     playerScore++;
-    gamesPlayed();
     document.getElementById('player_score').innerText = playerScore;
     resultsInformation.innerText = 'Player Won!';
 }
 
 function increaseComputerScore(){
     computerScore++;
-    gamesPlayed();
     document.getElementById('computer_score').innerText = computerScore;
     resultsInformation.innerText = 'The Computer Won!';
 }
@@ -90,67 +91,73 @@ function removeChoiceImages(img){
     }
 }
 
-//function to compare results
-function compare(playerChoice){
-    //if both the player's selection and computer's selection are the same, its a tied game
-    let computerDecision = Math.floor(Math.random() * choice.length);
+function getComputerChoice(){
+    return Math.floor(Math.random() * choice.length);
+}
 
-    if(playerChoice === choice[computerDecision]){
+
+
+//function to compare results
+function compare(playerChoice, computerChoice){
+    //if both the player's selection and computer's selection are the same, its a tied game
+    if(playerChoice === choice[computerChoice]){
         // tiedImage('assets/tie.png', 150, 150);
-        gamesPlayed();
     }
     //if player's selection is rock and computer's selection is paper, computer wins
-    else if(playerChoice === choice[0] && choice[computerDecision] === choice[1]){
+    else if(playerChoice === choice[0] && choice[computerChoice] === choice[1]){
         displayPlayerImage('assets/rock.png', 150, 150);
         displayComputerImage('assets/paper.png', 150, 150);
         increaseComputerScore();
     }
     //if player's selection is rock and computer's selection is scissors, player wins
-    else if(playerChoice === choice[0] && choice[computerDecision] === choice[2]){
+    else if(playerChoice === choice[0] && choice[computerChoice] === choice[2]){
         displayPlayerImage('assets/rock.png', 150, 150);
         displayComputerImage('assets/scissors.png', 150, 150);
         increasePlayerScore();
     }
     //if player's selection is paper and computer selection is rock, player wins
-    else if(playerChoice === choice[1] && choice[computerDecision] === choice[0]){
+    else if(playerChoice === choice[1] && choice[computerChoice]=== choice[0]){
         displayPlayerImage('assets/paper.png', 150, 150);
         displayComputerImage('assets/rock.png', 150, 150);
         increasePlayerScore();
     }
     //if player's selection is paper and computer selection is scissors, computer wins
-    else if(playerChoice === choice[1] && choice[computerDecision] === choice[2]){
+    else if(playerChoice === choice[1] && choice[computerChoice] === choice[2]){
         displayPlayerImage('assets/paper.png', 150, 150);
         displayComputerImage('assets/scissors.png', 150, 150);
         increaseComputerScore();
     }
     //if player's selection is scissors and computer selection is rock, computer wins
-    else if(playerChoice === choice[2] && choice[computerDecision] === choice[0]){
+    else if(playerChoice === choice[2] && choice[computerChoice] === choice[0]){
         displayPlayerImage('assets/scissors.png', 150, 150);
         displayComputerImage('assets/rock.png', 150, 150);
         increaseComputerScore();
     }
     //if player's selection is scissors and computer selection is paper, player wins
-    else if(playerChoice === choice[2] && choice[computerDecision] === choice[1]){
+    else if(playerChoice === choice[2] && choice[computerChoice] === choice[1]){
         displayPlayerImage('assets/scissors.png', 150, 150);
         displayComputerImage('assets/paper.png', 150, 150);
         increasePlayerScore();
     }
-    else
-        console.log('error!', playerChoice, choice[computerDecision]); 
-
+    else{
+        console.log('error!', playerChoice, choice[computerChoice]); 
+    }
 };
 
 //user selectection/buttons
 rockButton.addEventListener('click', () => {
-    compare(choice[0]);
+    playerChoice = choice[0];
+    game();
     removeChoiceImages();
 });
 paperButton.addEventListener('click', () => {
-    compare(choice[1]);
+    playerChoice = choice[1];
+    game();
     removeChoiceImages();
 });
 scissorsButton.addEventListener('click', () => {
-    compare(choice[2]);
+    playerChoice = choice[2];
+    game();
     removeChoiceImages();
 });
 threeGamesButton.addEventListener('click', () => {
@@ -169,3 +176,22 @@ sevenGamesButton.addEventListener('click', () => {
     hideStartupContainer();
     showGameContainer();
 });
+
+//main game function
+function game(){
+    if(amountOfGamesPlayed < gameLimit){
+        compare(playerChoice, getComputerChoice());
+        gamesPlayed();
+    }
+    if(amountOfGamesPlayed == gameLimit){
+        if(playerScore > computerScore){
+            console.log("Player wins!");
+        }
+        else if(computerScore > playerScore){
+            console.log("Computer Wins!");
+        }
+        else{
+            console.log("Tied game");
+        }
+    }
+}
