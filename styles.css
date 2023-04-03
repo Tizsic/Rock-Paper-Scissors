@@ -39,9 +39,18 @@
     position: relative;
 }
 
+
 #choice_container {
     display: flex;
     justify-content: space-between;
+}
+
+#animation_container {
+    display: flex;
+}
+
+#choice_animation{
+    margin: auto;
 }
 
 #results {

@@ -18,6 +18,9 @@ let playerScore = 0;
 let computerScore = 0;
 let amountOfGamesPlayed = 0;
 let gameLimit = 0;
+let playerImg = document.createElement("img");
+let computerImg = document.createElement("img");
+const tiedImg = document.createElement("img");
 
 //set game limit
 function setGameLimit(element){
@@ -60,12 +63,31 @@ function gamesPlayed(){
 }
 
 //show images/choices
-function displayChoiceImage(src, width, height){
-    const img = document.createElement("img");
-    img.src = src;
-    img.width = width;
-    img.height = height;
-    choiceAnimation.appendChild(img);
+function displayComputerImage(src, width, height){
+    computerImg.src = src;
+    computerImg.width = width;
+    computerImg.height = height;
+    choiceAnimation.appendChild(computerImg);
+}
+
+function displayPlayerImage(src, width, height){
+    playerImg.src = src;
+    playerImg.width = width;
+    playerImg.height = height;
+    choiceAnimation.appendChild(playerImg);
+}
+
+function tiedImage(src, width, height){
+    tiedImg.src = src;
+    tiedImg.width = width;
+    tiedImg.height = height;
+    choiceAnimation.appendChild(tiedImg);
+}
+
+function removeChoiceImages(img){
+    if(img != null){
+        choiceAnimation.removeChild(img);
+    }
 }
 
 //function to compare results
@@ -74,43 +96,43 @@ function compare(playerChoice){
     let computerDecision = Math.floor(Math.random() * choice.length);
 
     if(playerChoice === choice[computerDecision]){
-        displayChoiceImage('assets/tie.png', 150, 150);
+        // tiedImage('assets/tie.png', 150, 150);
         gamesPlayed();
     }
     //if player's selection is rock and computer's selection is paper, computer wins
     else if(playerChoice === choice[0] && choice[computerDecision] === choice[1]){
-        displayChoiceImage('assets/rock.png', 150, 150);
-        displayChoiceImage('assets/paper.png', 150, 150);
+        displayPlayerImage('assets/rock.png', 150, 150);
+        displayComputerImage('assets/paper.png', 150, 150);
         increaseComputerScore();
     }
     //if player's selection is rock and computer's selection is scissors, player wins
     else if(playerChoice === choice[0] && choice[computerDecision] === choice[2]){
-        displayChoiceImage('assets/rock.png', 150, 150);
-        displayChoiceImage('assets/scissors.png', 150, 150);
+        displayPlayerImage('assets/rock.png', 150, 150);
+        displayComputerImage('assets/scissors.png', 150, 150);
         increasePlayerScore();
     }
     //if player's selection is paper and computer selection is rock, player wins
     else if(playerChoice === choice[1] && choice[computerDecision] === choice[0]){
-        displayChoiceImage('assets/paper.png', 150, 150);
-        displayChoiceImage('assets/rock.png', 150, 150);
+        displayPlayerImage('assets/paper.png', 150, 150);
+        displayComputerImage('assets/rock.png', 150, 150);
         increasePlayerScore();
     }
     //if player's selection is paper and computer selection is scissors, computer wins
     else if(playerChoice === choice[1] && choice[computerDecision] === choice[2]){
-        displayChoiceImage('assets/paper.png', 150, 150);
-        displayChoiceImage('assets/scissors.png', 150, 150);
+        displayPlayerImage('assets/paper.png', 150, 150);
+        displayComputerImage('assets/scissors.png', 150, 150);
         increaseComputerScore();
     }
     //if player's selection is scissors and computer selection is rock, computer wins
     else if(playerChoice === choice[2] && choice[computerDecision] === choice[0]){
-        displayChoiceImage('assets/scissors.png', 150, 150);
-        displayChoiceImage('assets/rock.png', 150, 150);
+        displayPlayerImage('assets/scissors.png', 150, 150);
+        displayComputerImage('assets/rock.png', 150, 150);
         increaseComputerScore();
     }
     //if player's selection is scissors and computer selection is paper, player wins
     else if(playerChoice === choice[2] && choice[computerDecision] === choice[1]){
-        displayChoiceImage('assets/scissors.png', 150, 150);
-        displayChoiceImage('assets/paper.png', 150, 150);
+        displayPlayerImage('assets/scissors.png', 150, 150);
+        displayComputerImage('assets/paper.png', 150, 150);
         increasePlayerScore();
     }
     else
@@ -121,12 +143,15 @@ function compare(playerChoice){
 //user selectection/buttons
 rockButton.addEventListener('click', () => {
     compare(choice[0]);
+    removeChoiceImages();
 });
 paperButton.addEventListener('click', () => {
     compare(choice[1]);
+    removeChoiceImages();
 });
 scissorsButton.addEventListener('click', () => {
     compare(choice[2]);
+    removeChoiceImages();
 });
 threeGamesButton.addEventListener('click', () => {
     setGameLimit(3);
