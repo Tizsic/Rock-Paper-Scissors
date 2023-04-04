@@ -124,7 +124,6 @@ function compare(playerChoice, computerChoice){
         if(imgPlayer != undefined && imgComputer != undefined){
             imgPlayer.remove();
             imgComputer.remove();
-            createImageMiddle('assets/tie.png', 150, 150, middleMessage);
             resultsInformation.innerText = 'Tied Game';
         }     
     }
