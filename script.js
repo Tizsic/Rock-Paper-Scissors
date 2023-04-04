@@ -113,7 +113,10 @@ function getComputerChoice(){
 function compare(playerChoice, computerChoice){
     //if both the player's selection and computer's selection are the same, its a tied game
     if(playerChoice === choice[computerChoice]){
-        
+        if(imgPlayer != undefined && imgComputer != undefined){
+            imgPlayer.remove();
+            imgComputer.remove();
+        }
         resultsInformation.innerText = 'Tied Game';
     }
     //if player's selection is rock and computer's selection is paper, computer wins
@@ -195,10 +198,14 @@ function game(){
     }
     if(amountOfGamesPlayed == gameLimit){
         if(playerScore > computerScore){
+            if(imgPlayer != undefined && imgComputer != undefined){
+                imgPlayer.remove();
+                imgComputer.remove();
+                
+            }
             resultsInformation.innerText = 'Game Over! Player Wins!';
         }
         else if(computerScore > playerScore){
-            console.log("Computer Wins!");
             resultsInformation.innerText = 'Game Over! Computer Wins!';
         }
         else{

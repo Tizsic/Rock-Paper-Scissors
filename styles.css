@@ -57,11 +57,9 @@
 
 #animation_container {
     display: flex;
+    justify-content: space-between;
 }
 
-#choice_animation{
-    margin: auto;
-}
 
 #results {
     position: absolute;
@@ -87,6 +85,11 @@ button {
     
 }
 
-#player_choice_img {
-    
+#player_choice_img, #computer_choice_img {
+    margin-top: 35%;
+}
+
+#player_choice_img > img, #computer_choice_img> img{
+    width: 120px;
+    height: 120px;
 }
