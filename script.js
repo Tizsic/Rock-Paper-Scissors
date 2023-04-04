@@ -21,7 +21,7 @@ let amountOfGamesPlayed = 0;
 let gameLimit = 0;
 let playerImg = document.createElement("img");
 let computerImg = document.createElement("img");
-const tiedImg = document.createElement("img");
+const Img = document.createElement("img");
 let computerChoice = getComputerChoice();
 let playerChoice;
 
@@ -60,7 +60,6 @@ function increaseComputerScore(){
 function gamesPlayed(){
     amountOfGamesPlayed++;
     document.getElementById('games_played').innerText = amountOfGamesPlayed;
-    resultsInformation.innerText = "Tie Game!";
 }
 
 //show images/choices
@@ -78,16 +77,22 @@ function displayPlayerImage(src, width, height){
     choiceAnimation.appendChild(playerImg);
 }
 
-function tiedImage(src, width, height){
-    tiedImg.src = src;
-    tiedImg.width = width;
-    tiedImg.height = height;
-    choiceAnimation.appendChild(tiedImg);
+function image(src, width, height){
+    Img.src = src;
+    Img.width = width;
+    Img.height = height;
+    choiceAnimation.appendChild(Img);
 }
 
 function removeChoiceImages(img){
     if(img != null){
         choiceAnimation.removeChild(img);
+    }
+    else if(img == null){
+        console.log("1");
+    }
+    else{
+        console.log(img);
     }
 }
 
@@ -101,7 +106,10 @@ function getComputerChoice(){
 function compare(playerChoice, computerChoice){
     //if both the player's selection and computer's selection are the same, its a tied game
     if(playerChoice === choice[computerChoice]){
-        // tiedImage('assets/tie.png', 150, 150);
+        removeChoiceImages(playerImg);
+        removeChoiceImages(computerImg);
+        resultsInformation.innerText = 'Tied Game';
+        image('assets/tie.png', 150, 150);
     }
     //if player's selection is rock and computer's selection is paper, computer wins
     else if(playerChoice === choice[0] && choice[computerChoice] === choice[1]){
@@ -186,12 +194,21 @@ function game(){
     if(amountOfGamesPlayed == gameLimit){
         if(playerScore > computerScore){
             console.log("Player wins!");
+            removeChoiceImages(playerImg);
+            removeChoiceImages(computerImg);
+            image('assets/game_over.png', 150, 150);
+            resultsInformation.innerText = 'Game Over! Player Wins!';
         }
         else if(computerScore > playerScore){
             console.log("Computer Wins!");
+            removeChoiceImages(playerImg);
+            removeChoiceImages(computerImg);
+            image('assets/game_over.png', 150, 150);
+            resultsInformation.innerText = 'Game Over! Computer Wins!';
         }
         else{
             console.log("Tied game");
+            image('assets/game_over.png', 150, 150);
         }
     }
 }
