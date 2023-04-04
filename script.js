@@ -5,6 +5,7 @@ const scissorsButton = document.getElementById('scissors');
 const threeGamesButton = document.getElementById('three_games');
 const fiveGamesButton = document.getElementById('five_games');
 const sevenGamesButton = document.getElementById('seven_games');
+const homeButton = document.getElementById('home');
 
 //other initializations
 const choice = ['rock', 'paper', 'scissors'];
@@ -13,9 +14,10 @@ const startupContainer = document.getElementById('startup_container');
 const resultsInformation = document.getElementById('results');
 const playerChoiceImage = document.getElementById('player_choice_img');
 const computerChoiceImage = document.getElementById('computer_choice_img');
-let imgPlayer = document.createElement("img");
-let imgComputer = document.createElement("img");
-
+const middleMessage = document.getElementById('middle_message');
+const imgPlayer = document.createElement("img");
+const imgComputer = document.createElement("img");
+const imgMiddleMessage = document.createElement("img");
 //score keepers
 let playerScore = 0;
 let computerScore = 0;
@@ -25,18 +27,25 @@ let computerChoice = getComputerChoice();
 let playerChoice;
 
 //image handle
-function createImage(src, width, height, id){
+function createImage(src, width, height, container){
     imgPlayer.src = src;
     imgPlayer.width = width;
     imgPlayer.height = height;
-    id.appendChild(imgPlayer);
+    container.appendChild(imgPlayer);
 }
 
-function createImageComputer(src, width, height, id){
+function createImageComputer(src, width, height, container){
     imgComputer.src = src;
     imgComputer.width = width;
     imgComputer.height = height;
-    id.appendChild(imgComputer);
+    container.appendChild(imgComputer);
+}
+
+function createImageMiddle(src, width, height, container){
+    imgMiddleMessage.src = src;
+    imgMiddleMessage.width = width;
+    imgMiddleMessage.height = height;
+    container.appendChild(imgMiddleMessage);
 }
 
 //choice images (player)
@@ -108,7 +117,6 @@ function getComputerChoice(){
 }
 
 
-
 //function to compare results
 function compare(playerChoice, computerChoice){
     //if both the player's selection and computer's selection are the same, its a tied game
@@ -116,8 +124,9 @@ function compare(playerChoice, computerChoice){
         if(imgPlayer != undefined && imgComputer != undefined){
             imgPlayer.remove();
             imgComputer.remove();
-        }
-        resultsInformation.innerText = 'Tied Game';
+            createImageMiddle('assets/tie.png', 150, 150, middleMessage);
+            resultsInformation.innerText = 'Tied Game';
+        }     
     }
     //if player's selection is rock and computer's selection is paper, computer wins
     else if(playerChoice === choice[0] && choice[computerChoice] === choice[1]){
@@ -190,26 +199,32 @@ sevenGamesButton.addEventListener('click', () => {
     showGameContainer();
 });
 
+homeButton.addEventListener('click', () => {
+    window.location.reload();
+});
+
 //main game function
 function game(){
     if(amountOfGamesPlayed < gameLimit){
         compare(playerChoice, getComputerChoice());
         gamesPlayed();
     }
+
     if(amountOfGamesPlayed == gameLimit){
         if(playerScore > computerScore){
-            if(imgPlayer != undefined && imgComputer != undefined){
-                imgPlayer.remove();
-                imgComputer.remove();
-                
-            }
+            imgPlayer.remove();
+            imgComputer.remove();
+            createImageMiddle('assets/game_over.png', 150, 150, middleMessage);
             resultsInformation.innerText = 'Game Over! Player Wins!';
         }
         else if(computerScore > playerScore){
+            imgPlayer.remove();
+            imgComputer.remove();
+            createImageMiddle('assets/game_over.png', 150, 150, middleMessage);
             resultsInformation.innerText = 'Game Over! Computer Wins!';
         }
         else{
-            console.log("Tied game");
+            console.log("Tied game, non wins!");
         }
     }
 }
