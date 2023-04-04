@@ -21,6 +21,7 @@
 
 #game_container {
     display: none;
+    position: relative;
 }
 
 #score_container {
