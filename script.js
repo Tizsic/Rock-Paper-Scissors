@@ -11,7 +11,10 @@ const choice = ['rock', 'paper', 'scissors'];
 const gameContainer = document.getElementById('game_container');
 const startupContainer = document.getElementById('startup_container');
 const resultsInformation = document.getElementById('results');
-
+const playerChoiceImage = document.getElementById('player_choice_img');
+const computerChoiceImage = document.getElementById('computer_choice_img');
+let imgPlayer = document.createElement("img");
+let imgComputer = document.createElement("img");
 
 //score keepers
 let playerScore = 0;
@@ -20,6 +23,48 @@ let amountOfGamesPlayed = 0;
 let gameLimit = 0;
 let computerChoice = getComputerChoice();
 let playerChoice;
+
+//image handle
+function createImage(src, width, height, id){
+    imgPlayer.src = src;
+    imgPlayer.width = width;
+    imgPlayer.height = height;
+    id.appendChild(imgPlayer);
+}
+
+function createImageComputer(src, width, height, id){
+    imgComputer.src = src;
+    imgComputer.width = width;
+    imgComputer.height = height;
+    id.appendChild(imgComputer);
+}
+
+//choice images (player)
+function displayRockImage(){
+    createImage('assets/rock.png', 250, 250, playerChoiceImage);
+}
+
+function displayPaperImage(){
+    return createImage('assets/paper.png', 250, 250, playerChoiceImage);
+}
+
+function displayScissorsImage(){
+    return createImage('assets/scissors.png', 250, 250, playerChoiceImage);
+}
+
+//choice images (computer)
+function displayRockImageComputer(){
+    createImageComputer('assets/rock.png', 250, 250, computerChoiceImage);
+}
+
+function displayPaperImageComputer(){
+    return createImageComputer('assets/paper.png', 250, 250, computerChoiceImage);
+}
+
+function displayScissorsImageComputer(){
+    return createImageComputer('assets/scissors.png', 250, 250, computerChoiceImage);
+}
+
 
 //set game limit
 function setGameLimit(element){
@@ -68,30 +113,43 @@ function getComputerChoice(){
 function compare(playerChoice, computerChoice){
     //if both the player's selection and computer's selection are the same, its a tied game
     if(playerChoice === choice[computerChoice]){
+        
         resultsInformation.innerText = 'Tied Game';
     }
     //if player's selection is rock and computer's selection is paper, computer wins
     else if(playerChoice === choice[0] && choice[computerChoice] === choice[1]){
+        displayRockImage();
+        displayPaperImageComputer();
         increaseComputerScore();
     }
     //if player's selection is rock and computer's selection is scissors, player wins
     else if(playerChoice === choice[0] && choice[computerChoice] === choice[2]){
+        displayRockImage();
+        displayScissorsImageComputer();
         increasePlayerScore();
     }
     //if player's selection is paper and computer selection is rock, player wins
     else if(playerChoice === choice[1] && choice[computerChoice]=== choice[0]){
+        displayPaperImage();
+        displayRockImageComputer();
         increasePlayerScore();
     }
     //if player's selection is paper and computer selection is scissors, computer wins
     else if(playerChoice === choice[1] && choice[computerChoice] === choice[2]){
+        displayPaperImage();
+        displayScissorsImageComputer();
         increaseComputerScore();
     }
     //if player's selection is scissors and computer selection is rock, computer wins
     else if(playerChoice === choice[2] && choice[computerChoice] === choice[0]){
+        displayScissorsImage();
+        displayRockImageComputer();
         increaseComputerScore();
     }
     //if player's selection is scissors and computer selection is paper, player wins
     else if(playerChoice === choice[2] && choice[computerChoice] === choice[1]){
+        displayScissorsImage();
+        displayPaperImageComputer();
         increasePlayerScore();
     }
     else{

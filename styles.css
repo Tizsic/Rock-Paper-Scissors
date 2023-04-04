@@ -80,10 +80,13 @@ button {
     display: flex;
 }
 
-img {
-    width: 25px;
-    height: 25px;
+#rock, #paper, #scissors{
+    width: 125px;
+    height: 125px;
     margin: 15px;
     
 }
 
+#player_choice_img {
+    
+}
